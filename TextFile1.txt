@@ -1,0 +1,139 @@
+Private Sub tvFolders_MouseUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles tvFolders.MouseUp
+        Dim ClickedNode As TreeNode = tvFolders.GetNodeAt(e.Location)
+
+        tvFolders.SelectedNode = ClickedNode
+
+        If ClickedNode Is Nothing OrElse ClickedNode.Tag Is Nothing Then Return
+
+        cmsTree.Items.Clear()
+
+        Select Case ClickedNode.Tag.GetType.ToString
+            Case GetType(DirectoryNodeObject).ToString
+
+                Dim tsi As ToolStripItem = cmsTree.Items.Add("Explore This Folder")
+                tsi.Tag = ClickedNode.Tag
+                AddHandler tsi.Click, AddressOf ExploreToolStripItemClick
+
+                Dim tsi2 As ToolStripItem = cmsTree.Items.Add("Copy Path to Clipboard")
+                tsi2.Tag = ClickedNode.Tag
+                AddHandler tsi2.Click, AddressOf CopyPathToolStripItemClick
+
+                Dim tsi3 As ToolStripItem = cmsTree.Items.Add("Grant Access to This Folder")
+                tsi3.Tag = ClickedNode
+                AddHandler tsi3.Click, AddressOf GrantAccessToolStripItemClick
+
+                Dim tsi4 As ToolStripItem = cmsTree.Items.Add("Expand All")
+                tsi4.Tag = ClickedNode
+                AddHandler tsi4.Click, AddressOf ExpandAllToolStripItemClick
+
+                Dim tsi5 As ToolStripItem = cmsTree.Items.Add("Collapse All")
+                tsi5.Tag = ClickedNode
+                AddHandler tsi5.Click, AddressOf CollapseAllToolStripItemClick
+
+            Case GetType(AccessControlNodeObject).ToString
+                Dim tsi As ToolStripItem = cmsTree.Items.Add("Copy")
+                tsi.Tag = ClickedNode.Tag
+                AddHandler tsi.Click, AddressOf CopyACEToolStripItemClick
+
+                Dim NodeObject As AccessControlNodeObject = TryCast(tsi.Tag, AccessControlNodeObject)
+                If NodeObject Is Nothing Then Return
+
+                If NodeObject.SIDInfo IsNot Nothing AndAlso NodeObject.SIDInfo.SIDUse = Win32.SID_NAME_USE.SidTypeGroup Then
+                    Dim tsi2 As ToolStripItem = cmsTree.Items.Add("Show Members")
+                    tsi2.Tag = NodeObject
+                    AddHandler tsi2.Click, AddressOf ShowMembersToolStripItemClick
+                End If
+        End Select
+
+        If e.Button = Windows.Forms.MouseButtons.Right Then _
+            cmsTree.Show(tvFolders.PointToScreen(e.Location))
+
+    End Sub
+
+    Private Sub ShowMembersToolStripItemClick(ByVal sender As Object, ByVal e As EventArgs)
+        Dim tsi As ToolStripItem = TryCast(sender, ToolStripItem)
+        If tsi Is Nothing Then Return
+
+        Dim NodeObject As AccessControlNodeObject = TryCast(tsi.Tag, AccessControlNodeObject)
+        If NodeObject Is Nothing Then Return
+
+        If Not (NodeObject.SIDInfo Is Nothing OrElse String.IsNullOrEmpty(NodeObject.SIDInfo.Account)) Then
+            Try
+
+                Dim LDA As New LegacyDirectoryAccess
+                LDA.RefreshActiveDirectoryConnection()
+                LDA.ConnectActiveDirectoryConnection()
+
+                Dim Entry As New DirectoryEntry("LDAP://" + LDA.NTAccountToDistinguishedName(NodeObject.NTAccount.Value))
+
+                Dim Kludge As String = Entry.NativeGuid
+
+                Using frm As New frmMembers(Entry)
+                    frm.ShowDialog()
+                End Using
+            Catch ex As Exception
+                MessageBox.Show("Error displaying group members: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End If
+    End Sub
+
+    Private Sub CopyACEToolStripItemClick(ByVal sender As Object, ByVal e As EventArgs)
+        Dim tsi As ToolStripItem = TryCast(sender, ToolStripItem)
+        If tsi Is Nothing Then Return
+
+        Dim NodeObject As AccessControlNodeObject = TryCast(tsi.Tag, AccessControlNodeObject)
+        If NodeObject Is Nothing Then Return
+
+        Clipboard.SetText(NodeObject.DisplayText)
+    End Sub
+
+    Private Sub ExpandAllToolStripItemClick(ByVal sender As Object, ByVal e As EventArgs)
+        Dim tsi As ToolStripItem = TryCast(sender, ToolStripItem)
+        If tsi Is Nothing Then Return
+
+        Dim Node As TreeNode = TryCast(tsi.Tag, TreeNode)
+        If Node Is Nothing Then Return
+
+        Node.ExpandAll()
+    End Sub
+
+    Private Sub CollapseAllToolStripItemClick(ByVal sender As Object, ByVal e As EventArgs)
+        Dim tsi As ToolStripItem = TryCast(sender, ToolStripItem)
+        If tsi Is Nothing Then Return
+
+        Dim Node As TreeNode = TryCast(tsi.Tag, TreeNode)
+        If Node Is Nothing Then Return
+
+        Node.Collapse()
+    End Sub
+
+    Private Sub ExploreToolStripItemClick(ByVal sender As Object, ByVal e As EventArgs)
+        Dim tsi As ToolStripItem = TryCast(sender, ToolStripItem)
+        If tsi Is Nothing Then Return
+
+        Dim NodeObject As DirectoryNodeObject = TryCast(tsi.Tag, DirectoryNodeObject)
+        If NodeObject Is Nothing Then Return
+
+        Process.Start("explorer.exe", NodeObject.Info.FullName)
+
+    End Sub
+
+    Private Sub CopyPathToolStripItemClick(ByVal sender As Object, ByVal e As EventArgs)
+        Dim tsi As ToolStripItem = TryCast(sender, ToolStripItem)
+        If tsi Is Nothing Then Return
+
+        Dim NodeObject As DirectoryNodeObject = TryCast(tsi.Tag, DirectoryNodeObject)
+        If NodeObject Is Nothing Then Return
+
+        Clipboard.SetText(NodeObject.Info.FullName)
+
+    End Sub
+
+    Private Sub GrantAccessToolStripItemClick(ByVal sender As Object, ByVal e As EventArgs)
+        Dim tsi As ToolStripItem = TryCast(sender, ToolStripItem)
+        If tsi Is Nothing Then Return
+
+        If tsi.Tag IsNot Nothing And tsi.Tag.GetType Is GetType(TreeNode) Then _
+            ShowNodeAccessDialog(DirectCast(tsi.Tag, TreeNode))
+
+    End Sub
