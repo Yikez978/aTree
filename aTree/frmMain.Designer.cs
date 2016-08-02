@@ -182,6 +182,7 @@
             this.tabDelimitedFiletsvToolStripMenuItem.Name = "tabDelimitedFiletsvToolStripMenuItem";
             this.tabDelimitedFiletsvToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.tabDelimitedFiletsvToolStripMenuItem.Text = "Tab-Separated (.tsv)";
+            this.tabDelimitedFiletsvToolStripMenuItem.Click += new System.EventHandler(this.tabDelimitedFiletsvToolStripMenuItem_Click);
             // 
             // commaSeparatedcsvToolStripMenuItem
             // 
@@ -745,7 +746,6 @@
             this.tbError.Name = "tbError";
             this.tbError.Size = new System.Drawing.Size(331, 13);
             this.tbError.TabIndex = 14;
-            this.tbError.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // lbErrorMessage
             // 

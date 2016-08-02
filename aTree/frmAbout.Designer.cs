@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAbout));
             this.btnClose = new System.Windows.Forms.Button();
             this.tbCopy = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
@@ -35,7 +36,7 @@
             // btnClose
             // 
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.Location = new System.Drawing.Point(486, 235);
+            this.btnClose.Location = new System.Drawing.Point(488, 275);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
             this.btnClose.TabIndex = 0;
@@ -53,17 +54,19 @@
             this.tbCopy.Location = new System.Drawing.Point(12, 12);
             this.tbCopy.Multiline = true;
             this.tbCopy.Name = "tbCopy";
-            this.tbCopy.Size = new System.Drawing.Size(549, 217);
+            this.tbCopy.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbCopy.Size = new System.Drawing.Size(551, 257);
             this.tbCopy.TabIndex = 1;
             // 
             // frmAbout
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(573, 270);
+            this.ClientSize = new System.Drawing.Size(575, 310);
             this.Controls.Add(this.tbCopy);
             this.Controls.Add(this.btnClose);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmAbout";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "About aTree";
