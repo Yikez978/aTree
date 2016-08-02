@@ -13,6 +13,7 @@ using System.Threading;
 using System.Threading.Tasks.Schedulers;
 using Microsoft.VisualBasic.CompilerServices;
 using System.Xml.Serialization;
+using System.IO.Compression;
 
 namespace aTree
 {
@@ -52,6 +53,9 @@ namespace aTree
         {
             Properties.Settings.Default.Upgrade();
             Properties.Settings.Default.Save();
+
+            tvStructure.Nodes.Clear();
+            CurrentObject = null;
         }
 
         #endregion
@@ -123,8 +127,14 @@ namespace aTree
         #region "Control States"
 
         private void PreWorkerControls() {
+            PreWorkerControls(true);
+        }
 
-            tvStructure.Nodes.Clear();
+        private void PreWorkerControls(bool ClearView) {
+
+            if (ClearView) tvStructure.Nodes.Clear();
+
+            tvStructure.Enabled = false;
 
             tcMain.SelectedTab = tpDefault;
             tsbShowInherited.Enabled = false;
@@ -160,6 +170,8 @@ namespace aTree
             exportTreeToolStripMenuItem.Enabled = true;
             copyToClipboardToolStripMenuItem.Enabled = true;
             advancedToolStripMenuItem.Enabled = true;
+
+            tvStructure.Enabled = true;
 
             tsbStartScanning.Text = "Start Scanning";
             tsbStartScanning.Image = Properties.Resources.start128x128.ToBitmap();
@@ -817,7 +829,8 @@ namespace aTree
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+
+            Close();
         }
 
         private void ttbLevelCount_TextChanged(object sender, EventArgs e)
@@ -848,6 +861,9 @@ namespace aTree
             Properties.Settings.Default.Scan_Direction = tscScanDirection.SelectedIndex;
         }
 
+        #region "Saving File"
+
+
         private void saveTreeToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
@@ -867,10 +883,73 @@ namespace aTree
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning
                 );
+                return;
             }
 
             CommonSaveFileDialog cfd = new CommonSaveFileDialog();
-            cfd.Filters.Add(new CommonFileDialogFilter("aTree XML File(*.txl)", "*.txl"));
+            cfd.Filters.Add(new CommonFileDialogFilter("aTree Compressed XML File(*.gztxl)", "*.gztxl"));
+            cfd.Filters.Add(new CommonFileDialogFilter("All files(*.*)", "*.*"));
+            cfd.DefaultExtension = ".gztxl";
+
+            if (cfd.ShowDialog() != CommonFileDialogResult.Ok)
+            {
+                return;
+            }
+
+            PreWorkerControls(false);
+            SetFooterLabel("Saving file...");
+
+            bwSaveFile.RunWorkerAsync(new object[] {cfd.FileName, CurrentObject});
+
+        }
+        private void bwSaveFile_DoWork(object sender, DoWorkEventArgs e)
+        {
+            string FileName = (string)((object[])e.Argument)[0];
+            aTreeControlledFileSystemObject CurrentObject = 
+                (aTreeControlledFileSystemObject)((object[])e.Argument)[1];
+
+            try
+            {
+                XmlSerializer x = new XmlSerializer(typeof(aTreeControlledFileSystemObject));
+
+                using (StreamWriter writer = new StreamWriter(FileName))
+                {
+                    using(GZipStream deflator = new GZipStream(writer.BaseStream, CompressionLevel.Optimal, true))
+                    {
+                        x.Serialize(deflator, CurrentObject);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                e.Result = ex;
+                return;
+            }
+        }
+        private void bwSaveFile_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Result != null) {
+
+                MessageBox.Show(
+                    "Failed to save file: " + ((Exception)e.Result).Message,
+                    "Warning",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+            }
+
+            PostWorkerControls();
+        }
+
+        #endregion
+
+        #region "Opening File"
+
+        private void openTreeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            CommonOpenFileDialog cfd = new CommonOpenFileDialog();
+            cfd.Filters.Add(new CommonFileDialogFilter("aTree Compressed XML File(*.gztxl)", "*.gztxl"));
             cfd.Filters.Add(new CommonFileDialogFilter("All files(*.*)", "*.*"));
 
             if (cfd.ShowDialog() != CommonFileDialogResult.Ok)
@@ -878,73 +957,77 @@ namespace aTree
                 return;
             }
 
-            try
-            {
-                XmlSerializer x = new XmlSerializer(typeof(aTreeControlledFileSystemObject));
+            PreWorkerControls();
+            SetFooterLabel("Opening file...");
 
-                using (StreamWriter writer = new StreamWriter(cfd.FileName))
-                {
-                    x.Serialize(writer, CurrentObject);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(
-                    "Failed to save file: " + ex.Message,
-                    "Warning",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                );
+            bwOpenFile.RunWorkerAsync(new object[] { cfd.FileName });
 
-                return;
-
-            }
         }
-
-        private void openTreeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void bwOpenFile_DoWork(object sender, DoWorkEventArgs e)
         {
 
-            CommonOpenFileDialog cfd = new CommonOpenFileDialog();
-            if (cfd.ShowDialog() != CommonFileDialogResult.Ok)
-            {
-                return;
-            }
-
-            string XmlInput = string.Empty;
+            string FileName = (string)((object[])e.Argument)[0];
+            object CurrentObject = null;
 
             try
             {
 
                 XmlSerializer x = new XmlSerializer(typeof(aTreeControlledFileSystemObject));
 
-                using (StreamReader reader = new StreamReader(cfd.FileName))
+                using (StreamReader reader = new StreamReader(FileName))
                 {
-                    CurrentObject = (aTreeControlledFileSystemObject)x.Deserialize(reader);
+                    using (GZipStream inflator = new GZipStream(reader.BaseStream,CompressionMode.Decompress,true)) {
+                        CurrentObject = (aTreeControlledFileSystemObject)x.Deserialize(inflator);
+                    }
                 }
-
             }
             catch (Exception ex)
             {
+                e.Result = ex;
+                return;
+            }
+
+            e.Result = CurrentObject;
+
+        }
+        private void bwOpenFile_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Result == null) {
+
                 MessageBox.Show(
-                    "Failed to read file: " + ex.Message,
+                    "Unexpected error occured during read.",
                     "Warning",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning
                 );
 
-                return;
             }
 
-            PreWorkerControls();
+            if (e.Result.GetType() == typeof(Exception))
+            {
 
+                MessageBox.Show(
+                    "Failed to read file: " + ((Exception)e.Result).Message,
+                    "Warning",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
+            }
+
+            CurrentObject = (aTreeControlledFileSystemObject)e.Result;
             tbPath.Text = CurrentObject.FullName;
 
             aTreeConfig Config = GetConfig();
             Config.RootPath = CurrentObject.FullName;
 
+            SetFooterLabel("Building tree...");
+
             bwBuildTree.RunWorkerAsync(new object[] { CurrentObject, GetConfig() });
 
         }
+
+        #endregion
 
         #endregion
         #region "Tree Context Menu"
@@ -1390,8 +1473,63 @@ namespace aTree
                 }
         }
 
-        string CreateSvItem(aTreeAccessControlEntry ControlItem, char Delimiter, int Levels) {
-            
+        private void commaSeparatedcsvToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (CurrentObject == null)
+            {
+                MessageBox.Show(
+                    "Nothing to save yet, please run tool at least once.",
+                    "Warning",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+            }
+
+            string FileContents =
+                "Identity | File Name" + ',' +
+                "Access Control Type | Owner" + ',' +
+                "Access Flags | Size" + ',' +
+                "Is Inherited | Last Access Time" + ',' +
+                "Inheritence Flags | Last Write Time" + ',' +
+                "Propagation Flags | nocolumn" + "\r\n";
+
+            FileContents += CreateSvItem(CurrentObject, ',', 0);
+
+            CommonSaveFileDialog cfd = new CommonSaveFileDialog();
+            cfd.Filters.Add(new CommonFileDialogFilter("Comma-Separated Values(*.csv)", "*.csv"));
+            cfd.Filters.Add(new CommonFileDialogFilter("All files(*.*)", "*.*"));
+
+            if (cfd.ShowDialog() != CommonFileDialogResult.Ok)
+            {
+                return;
+            }
+
+            try
+            {
+
+                using (StreamWriter writer = new StreamWriter(cfd.FileName))
+                {
+                    writer.Write(FileContents);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Failed to save file: " + ex.Message,
+                    "Warning",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
+                return;
+
+            }
+        }
+
+
+        string CreateSvItem(aTreeAccessControlEntry ControlItem, char Delimiter, int Levels)
+        {
+
             string ReturnValue = "Access Control" + Delimiter;
 
             //for (int i = 0; i < Levels; i++) {
@@ -1403,9 +1541,10 @@ namespace aTree
             ReturnValue +=
                 EscapeDelimiterString(ControlItem.Identity.ToString(), Delimiter) + Delimiter;
 
-                EnumName = Enum.GetName(typeof(AccessControlType), ControlItem.AccessControlType);
-            if (EnumName != null) {
-                ReturnValue += EscapeDelimiterString(EnumName ,Delimiter) + Delimiter;
+            EnumName = Enum.GetName(typeof(AccessControlType), ControlItem.AccessControlType);
+            if (EnumName != null)
+            {
+                ReturnValue += EscapeDelimiterString(EnumName, Delimiter) + Delimiter;
             }
             else {
                 ReturnValue += EscapeDelimiterString(ControlItem.AccessControlType.ToString(), Delimiter) + Delimiter;
@@ -1445,11 +1584,12 @@ namespace aTree
             ReturnValue += "\r\n";
 
             return ReturnValue;
-                    
+
         }
 
 
-        string CreateSvItem(aTreeControlledFileSystemObject ControlItem, char Delimiter, int Levels) {
+        string CreateSvItem(aTreeControlledFileSystemObject ControlItem, char Delimiter, int Levels)
+        {
             string ReturnValue = "File System" + Delimiter;
 
             //for (int i = 0; i < Levels; i++)
@@ -1464,7 +1604,8 @@ namespace aTree
                 EscapeDelimiterString(ControlItem.LastAccessTime.ToString(DateTimeFormat), Delimiter) + Delimiter +
                 EscapeDelimiterString(ControlItem.LastWriteTime.ToString(DateTimeFormat), Delimiter) + "\r\n";
 
-            foreach (aTreeAccessControlEntry a in ControlItem.AccessControlEntries) {
+            foreach (aTreeAccessControlEntry a in ControlItem.AccessControlEntries)
+            {
                 ReturnValue += CreateSvItem(a, Delimiter, Levels + 1);
             }
 
@@ -1477,18 +1618,20 @@ namespace aTree
 
         }
 
-        string EscapeDelimiterString(string Value, char Delimiter) {
-            if (Delimiter == '\0') {
+        string EscapeDelimiterString(string Value, char Delimiter)
+        {
+            if (Delimiter == '\0')
+            {
                 return Value;
             }
 
-            while (Value.IndexOf(Delimiter) != -1 && Value.IndexOf(Delimiter) != '\\') {
+            while (Value.IndexOf(Delimiter) != -1 && Value.IndexOf(Delimiter) != '\\')
+            {
                 Value = Value.Insert(Value.IndexOf(Delimiter), "\\");
             }
 
             return Value;
         }
-
 
     }
 }

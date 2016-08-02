@@ -37,7 +37,6 @@
             this.exportTreeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabDelimitedFiletsvToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.commaSeparatedcsvToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.xMLDocumentxmlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -110,6 +109,9 @@
             this.bwBuildTree = new System.ComponentModel.BackgroundWorker();
             this.tbPath = new System.Windows.Forms.TextBox();
             this.cmsTree = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.bwCreateSvItem = new System.ComponentModel.BackgroundWorker();
+            this.bwOpenFile = new System.ComponentModel.BackgroundWorker();
+            this.bwSaveFile = new System.ComponentModel.BackgroundWorker();
             this.msMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).BeginInit();
             this.scMain.Panel1.SuspendLayout();
@@ -171,8 +173,7 @@
             // 
             this.exportTreeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tabDelimitedFiletsvToolStripMenuItem,
-            this.commaSeparatedcsvToolStripMenuItem,
-            this.xMLDocumentxmlToolStripMenuItem});
+            this.commaSeparatedcsvToolStripMenuItem});
             this.exportTreeToolStripMenuItem.Name = "exportTreeToolStripMenuItem";
             this.exportTreeToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.exportTreeToolStripMenuItem.Text = "&Export Tree";
@@ -189,12 +190,7 @@
             this.commaSeparatedcsvToolStripMenuItem.Name = "commaSeparatedcsvToolStripMenuItem";
             this.commaSeparatedcsvToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.commaSeparatedcsvToolStripMenuItem.Text = "Comma-Separated (.csv)";
-            // 
-            // xMLDocumentxmlToolStripMenuItem
-            // 
-            this.xMLDocumentxmlToolStripMenuItem.Name = "xMLDocumentxmlToolStripMenuItem";
-            this.xMLDocumentxmlToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
-            this.xMLDocumentxmlToolStripMenuItem.Text = "XML Document (.xml)";
+            this.commaSeparatedcsvToolStripMenuItem.Click += new System.EventHandler(this.commaSeparatedcsvToolStripMenuItem_Click);
             // 
             // copyToClipboardToolStripMenuItem
             // 
@@ -985,6 +981,16 @@
             this.cmsTree.Name = "cmsTree";
             this.cmsTree.Size = new System.Drawing.Size(61, 4);
             // 
+            // bwOpenFile
+            // 
+            this.bwOpenFile.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bwOpenFile_DoWork);
+            this.bwOpenFile.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bwOpenFile_RunWorkerCompleted);
+            // 
+            // bwSaveFile
+            // 
+            this.bwSaveFile.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bwSaveFile_DoWork);
+            this.bwSaveFile.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bwSaveFile_RunWorkerCompleted);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1044,7 +1050,6 @@
         private System.Windows.Forms.ToolStripMenuItem exportTreeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tabDelimitedFiletsvToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem commaSeparatedcsvToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem xMLDocumentxmlToolStripMenuItem;
         private System.Windows.Forms.SplitContainer scMain;
         private System.Windows.Forms.TreeView tvStructure;
         private System.Windows.Forms.ToolStripMenuItem copyToClipboardToolStripMenuItem;
@@ -1117,6 +1122,9 @@
         private System.Windows.Forms.Label lbStackTrace;
         private System.Windows.Forms.TextBox tbError;
         private System.Windows.Forms.Label lbErrorMessage;
+        private System.ComponentModel.BackgroundWorker bwCreateSvItem;
+        private System.ComponentModel.BackgroundWorker bwOpenFile;
+        private System.ComponentModel.BackgroundWorker bwSaveFile;
     }
 }
 
