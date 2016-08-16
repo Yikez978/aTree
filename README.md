@@ -10,3 +10,7 @@ It will report whom each access control entry is granting access, the type and l
 Basic filtering is in place, allowing a user to search for a specific folder by name, or to see what folder(s) a group may have access.
 
 This is an ongoing side project, with many bugs, todos, cleanup, and potential improvements, but feel free to point anything out.
+
+# Donate
+If this software helped you out of a tight spot, please consider a bitcoin donation. This can be done from:
+http://this.damn.software/p/development-projects.html
