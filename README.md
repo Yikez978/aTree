@@ -14,3 +14,5 @@ This is an ongoing side project, with many bugs, todos, cleanup, and potential i
 # Donate
 If this software helped you out of a tight spot, please consider a bitcoin donation. This can be done from:
 http://this.damn.software/p/development-projects.html
+
+Thank you!
