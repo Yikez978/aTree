@@ -23,6 +23,7 @@ namespace aTree
         InheritedGroup=12,
         InheritedGroupError=13,
         InheritedSecurityIdentifier=14,
-        InheritedSecurityIdentifierError=15
+        InheritedSecurityIdentifierError=15,
+        Reparse=16
     }
 }

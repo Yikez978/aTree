@@ -10,6 +10,7 @@ namespace aTree
     {
         Folder,
         File,
+        Reparse,
         Access,
         Undetermined
     }

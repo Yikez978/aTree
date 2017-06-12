@@ -5,7 +5,6 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.WindowsAPICodePack.Dialogs;
 using System.Security.AccessControl;
 using System.Security.Principal;
 using System.IO;
@@ -62,10 +61,9 @@ namespace aTree
         #region "Browse button."
         private void btnBrowse_Click(object sender, EventArgs e)
         {
-            CommonOpenFileDialog cfd = new CommonOpenFileDialog();
-            cfd.IsFolderPicker = true;
-            if (cfd.ShowDialog() == CommonFileDialogResult.Ok) {
-                tbPath.Text = cfd.FileName;
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            if (fbd.ShowDialog() == DialogResult.OK) {
+                tbPath.Text = fbd.SelectedPath;
             }
         }
         #endregion
@@ -528,33 +526,54 @@ namespace aTree
 
                     CurrentObject.Owner = SidToName((SecurityIdentifier)Info.GetAccessControl().GetOwner(typeof(SecurityIdentifier)));
 
-                    if (Config.ScanDirection == aTreeScanDirection.Up)
+                    //Checking if it's a reparse object, i.e., a device, mount, or symlink.
+                    if (!DirectoryInfoExtensions.IsReal(Info) && CurrentLevel > 0)
                     {
+                        CurrentObject.ObjectCategory = aTreeControlledObjectCategory.Reparse;
+                        CurrentObject.DisplayClass = aTreeObjectDisplayCategory.Reparse;
 
-                        List<DirectoryInfo> ChildList = new List<DirectoryInfo>();
+                        //No. If this isn't a *real* folder, we're not going inside. This would give misleading data.
+                        //
+                        //The exception, is if the user actually selected a reparse point as the root for enumeration.
+                        //If that's the case, we'll enumerate the reparse point and its children, but no reparse points below it.
 
-                        if (Info.Parent != null && Info.Parent.FullName != Path)
+                        if (CurrentLevel == 0)
                         {
-                            ChildList.Add(Info.Parent);
+
                         }
 
-                        ChildDirectories = ChildList.ToArray();
+                    } else {
+
+                        if (Config.ScanDirection == aTreeScanDirection.Up)
+                        {
+
+                            List<DirectoryInfo> ChildList = new List<DirectoryInfo>();
+
+                            if (Info.Parent != null && Info.Parent.FullName != Path)
+                            {
+                                ChildList.Add(Info.Parent);
+                            }
+
+                            ChildDirectories = ChildList.ToArray();
+
+                        }
+                        else
+                        {
+                            ChildDirectories = Info.GetDirectories();
+                        }
+
+                        if (Config.ShowFiles)
+                        {
+                            ChildFiles = Info.GetFiles();
+                        }
+
+                        ChildRules = Info.GetAccessControl().GetAccessRules(
+                            true, true, typeof(System.Security.Principal.SecurityIdentifier));
 
                     }
-                    else {
-                        ChildDirectories = Info.GetDirectories();
-                    }
-
-                    if (Config.ShowFiles)
-                    {
-                        ChildFiles = Info.GetFiles();
-                    }
-
-                    ChildRules = Info.GetAccessControl().GetAccessRules(
-                        true, true, typeof(System.Security.Principal.SecurityIdentifier));
-
                 }
 
+                    
                 if (File.Exists(Path))
                 {
                     //File stuff.
@@ -576,7 +595,16 @@ namespace aTree
                     ChildRules = Info.GetAccessControl().GetAccessRules(
                         true, true, typeof(System.Security.Principal.SecurityIdentifier));
 
+                    //Checking if it's a reparse object, i.e., a device, mount, or symlink.
+                    if (!FileInfoExtensions.IsReal(Info)) {
+
+                        CurrentObject.ObjectCategory = aTreeControlledObjectCategory.Reparse;
+                        CurrentObject.DisplayClass = aTreeObjectDisplayCategory.Reparse;
+
+                    }
+
                 }
+
             }
             catch (Exception e)
             {
@@ -586,6 +614,10 @@ namespace aTree
 
                     case aTreeControlledObjectCategory.File:
                         CurrentObject.DisplayClass = aTreeObjectDisplayCategory.FileError;
+                        break;
+
+                    case aTreeControlledObjectCategory.Reparse:
+                        CurrentObject.DisplayClass = aTreeObjectDisplayCategory.Reparse;
                         break;
 
                     case aTreeControlledObjectCategory.Folder:
@@ -886,6 +918,17 @@ namespace aTree
                 return;
             }
 
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "aTree Compressed XML File(*.gztxl)|*.gztxl|All Files (*.*)|*.*";
+            sfd.DefaultExt = ".gztxl";
+
+            if (sfd.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+            /* Replacing this with my own code. I love Windows API code pack, but avoid using others'
+             * projects as much as possible.
             CommonSaveFileDialog cfd = new CommonSaveFileDialog();
             cfd.Filters.Add(new CommonFileDialogFilter("aTree Compressed XML File(*.gztxl)", "*.gztxl"));
             cfd.Filters.Add(new CommonFileDialogFilter("All files(*.*)", "*.*"));
@@ -895,11 +938,12 @@ namespace aTree
             {
                 return;
             }
+            */
 
             PreWorkerControls(false);
             SetFooterLabel("Saving file...");
 
-            bwSaveFile.RunWorkerAsync(new object[] {cfd.FileName, CurrentObject});
+            bwSaveFile.RunWorkerAsync(new object[] {sfd.FileName, CurrentObject});
 
         }
         private void bwSaveFile_DoWork(object sender, DoWorkEventArgs e)
@@ -947,7 +991,18 @@ namespace aTree
 
         private void openTreeToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "aTree Compressed XML File(*.gztxl)|*.gztxl|All Files (*.*)|*.*";
+            ofd.DefaultExt = ".gztxl";
 
+            if (ofd.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+            /* Replacing this with my own code. I love Windows API code pack, but avoid using others'
+             * projects as much as possible.
+             * 
             CommonOpenFileDialog cfd = new CommonOpenFileDialog();
             cfd.Filters.Add(new CommonFileDialogFilter("aTree Compressed XML File(*.gztxl)", "*.gztxl"));
             cfd.Filters.Add(new CommonFileDialogFilter("All files(*.*)", "*.*"));
@@ -956,11 +1011,12 @@ namespace aTree
             {
                 return;
             }
+            */
 
             PreWorkerControls();
             SetFooterLabel("Opening file...");
 
-            bwOpenFile.RunWorkerAsync(new object[] { cfd.FileName });
+            bwOpenFile.RunWorkerAsync(new object[] { ofd.FileName });
 
         }
         private void bwOpenFile_DoWork(object sender, DoWorkEventArgs e)
@@ -1182,7 +1238,8 @@ namespace aTree
         private void SelectNode(aTreeNode Node) {
 
             if (Node.ObjectCategory == aTreeControlledObjectCategory.File ||
-                Node.ObjectCategory == aTreeControlledObjectCategory.Folder)
+                Node.ObjectCategory == aTreeControlledObjectCategory.Folder ||
+                Node.ObjectCategory == aTreeControlledObjectCategory.Reparse)
             {
 
                 aTreeControlledFileSystemObject DetailObject =
@@ -1442,11 +1499,12 @@ namespace aTree
 
                 FileContents += CreateSvItem(CurrentObject,'\t', 0);
 
-                CommonSaveFileDialog cfd = new CommonSaveFileDialog();
-                cfd.Filters.Add(new CommonFileDialogFilter("Tab-Separated Values(*.tsv)", "*.tsv"));
-                cfd.Filters.Add(new CommonFileDialogFilter("All files(*.*)", "*.*"));
+                OpenFileDialog ofd = new OpenFileDialog();
 
-                if (cfd.ShowDialog() != CommonFileDialogResult.Ok)
+                ofd.Filter = "Tab-Separated Values(*.tsv)|*.tsv|All Files (*.*)|*.*";
+                ofd.DefaultExt = ".tsv";
+
+                if (ofd.ShowDialog() != DialogResult.OK)
                 {
                     return;
                 }
@@ -1454,7 +1512,7 @@ namespace aTree
                 try
                 {
 
-                    using (StreamWriter writer = new StreamWriter(cfd.FileName))
+                    using (StreamWriter writer = new StreamWriter(ofd.FileName))
                     {
                         writer.Write(FileContents);
                     }
@@ -1495,11 +1553,11 @@ namespace aTree
 
             FileContents += CreateSvItem(CurrentObject, ',', 0);
 
-            CommonSaveFileDialog cfd = new CommonSaveFileDialog();
-            cfd.Filters.Add(new CommonFileDialogFilter("Comma-Separated Values(*.csv)", "*.csv"));
-            cfd.Filters.Add(new CommonFileDialogFilter("All files(*.*)", "*.*"));
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Tab-Separated Values(*.tsv)|*.tsv|All Files (*.*)|*.*";
+            sfd.DefaultExt = ".tsv";
 
-            if (cfd.ShowDialog() != CommonFileDialogResult.Ok)
+            if (sfd.ShowDialog() != DialogResult.OK)
             {
                 return;
             }
@@ -1507,7 +1565,7 @@ namespace aTree
             try
             {
 
-                using (StreamWriter writer = new StreamWriter(cfd.FileName))
+                using (StreamWriter writer = new StreamWriter(sfd.FileName))
                 {
                     writer.Write(FileContents);
                 }

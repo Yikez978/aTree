@@ -55,31 +55,20 @@
     <ManifestKeyFile>aTree_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <GenerateManifests>true</GenerateManifests>
+    <GenerateManifests>false</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
-  </PropertyGroup>
+  <PropertyGroup />
   <PropertyGroup>
     <SignManifests>false</SignManifests>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\WindowsAPICodePack-Core.1.1.2\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\WindowsAPICodePack-Shell.1.1.1\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.WindowsAPICodePack.ShellExtensions, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\WindowsAPICodePack-ShellExtensions.1.1.1\lib\Microsoft.WindowsAPICodePack.ShellExtensions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="ParallelExtensionsExtras, Version=1.2.3.0, Culture=neutral, PublicKeyToken=665f4d61f853b5a9, processorArchitecture=MSIL">
       <HintPath>..\packages\ParallelExtensionsExtras.1.2.0.0\lib\net40\ParallelExtensionsExtras.dll</HintPath>
       <Private>True</Private>
@@ -105,6 +94,7 @@
     <Compile Include="aTreeController.cs" />
     <Compile Include="aTreeControllerStatusCallbackDelegate.cs" />
     <Compile Include="aTreeScanDirection.cs" />
+    <Compile Include="InfoExtensions.cs" />
     <Compile Include="FileSize.cs" />
     <Compile Include="frmAdvanced.cs">
       <SubType>Form</SubType>
@@ -147,7 +137,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="aTree_TemporaryKey.pfx" />
     <None Include="aTree_v0.100_release.zip" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
@@ -185,12 +174,6 @@
     <None Include="Resources\folder_apollon.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\files.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ooo_calc.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\file16x16.png" />
   </ItemGroup>
   <ItemGroup>
@@ -210,6 +193,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\link16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Image1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

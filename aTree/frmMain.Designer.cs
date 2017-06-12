@@ -134,13 +134,15 @@
             // 
             // msMain
             // 
+            this.msMain.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.optionsToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.msMain.Location = new System.Drawing.Point(0, 0);
             this.msMain.Name = "msMain";
-            this.msMain.Size = new System.Drawing.Size(703, 24);
+            this.msMain.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
+            this.msMain.Size = new System.Drawing.Size(937, 28);
             this.msMain.TabIndex = 0;
             // 
             // fileToolStripMenuItem
@@ -152,20 +154,20 @@
             this.copyToClipboardToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // saveTreeToolStripMenuItem
             // 
             this.saveTreeToolStripMenuItem.Name = "saveTreeToolStripMenuItem";
-            this.saveTreeToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.saveTreeToolStripMenuItem.Size = new System.Drawing.Size(206, 26);
             this.saveTreeToolStripMenuItem.Text = "&Save Tree";
             this.saveTreeToolStripMenuItem.Click += new System.EventHandler(this.saveTreeToolStripMenuItem_Click);
             // 
             // openTreeToolStripMenuItem
             // 
             this.openTreeToolStripMenuItem.Name = "openTreeToolStripMenuItem";
-            this.openTreeToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.openTreeToolStripMenuItem.Size = new System.Drawing.Size(206, 26);
             this.openTreeToolStripMenuItem.Text = "&Open Tree";
             this.openTreeToolStripMenuItem.Click += new System.EventHandler(this.openTreeToolStripMenuItem_Click);
             // 
@@ -175,33 +177,33 @@
             this.tabDelimitedFiletsvToolStripMenuItem,
             this.commaSeparatedcsvToolStripMenuItem});
             this.exportTreeToolStripMenuItem.Name = "exportTreeToolStripMenuItem";
-            this.exportTreeToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.exportTreeToolStripMenuItem.Size = new System.Drawing.Size(206, 26);
             this.exportTreeToolStripMenuItem.Text = "&Export Tree";
             // 
             // tabDelimitedFiletsvToolStripMenuItem
             // 
             this.tabDelimitedFiletsvToolStripMenuItem.Name = "tabDelimitedFiletsvToolStripMenuItem";
-            this.tabDelimitedFiletsvToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.tabDelimitedFiletsvToolStripMenuItem.Size = new System.Drawing.Size(247, 26);
             this.tabDelimitedFiletsvToolStripMenuItem.Text = "Tab-Separated (.tsv)";
             this.tabDelimitedFiletsvToolStripMenuItem.Click += new System.EventHandler(this.tabDelimitedFiletsvToolStripMenuItem_Click);
             // 
             // commaSeparatedcsvToolStripMenuItem
             // 
             this.commaSeparatedcsvToolStripMenuItem.Name = "commaSeparatedcsvToolStripMenuItem";
-            this.commaSeparatedcsvToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.commaSeparatedcsvToolStripMenuItem.Size = new System.Drawing.Size(247, 26);
             this.commaSeparatedcsvToolStripMenuItem.Text = "Comma-Separated (.csv)";
             this.commaSeparatedcsvToolStripMenuItem.Click += new System.EventHandler(this.commaSeparatedcsvToolStripMenuItem_Click);
             // 
             // copyToClipboardToolStripMenuItem
             // 
             this.copyToClipboardToolStripMenuItem.Name = "copyToClipboardToolStripMenuItem";
-            this.copyToClipboardToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.copyToClipboardToolStripMenuItem.Size = new System.Drawing.Size(206, 26);
             this.copyToClipboardToolStripMenuItem.Text = "Copy to Cli&pboard";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(206, 26);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -210,13 +212,13 @@
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.advancedToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(73, 24);
             this.optionsToolStripMenuItem.Text = "&Options";
             // 
             // advancedToolStripMenuItem
             // 
             this.advancedToolStripMenuItem.Name = "advancedToolStripMenuItem";
-            this.advancedToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.advancedToolStripMenuItem.Size = new System.Drawing.Size(150, 26);
             this.advancedToolStripMenuItem.Text = "&Advanced";
             this.advancedToolStripMenuItem.Click += new System.EventHandler(this.advancedToolStripMenuItem_Click);
             // 
@@ -225,13 +227,13 @@
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
             this.helpToolStripMenuItem.Text = "&Help";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(125, 26);
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -240,7 +242,8 @@
             this.scMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.scMain.Location = new System.Drawing.Point(1, 81);
+            this.scMain.Location = new System.Drawing.Point(1, 100);
+            this.scMain.Margin = new System.Windows.Forms.Padding(4);
             this.scMain.Name = "scMain";
             // 
             // scMain.Panel1
@@ -250,8 +253,9 @@
             // scMain.Panel2
             // 
             this.scMain.Panel2.Controls.Add(this.tcMain);
-            this.scMain.Size = new System.Drawing.Size(702, 444);
-            this.scMain.SplitterDistance = 233;
+            this.scMain.Size = new System.Drawing.Size(936, 546);
+            this.scMain.SplitterDistance = 310;
+            this.scMain.SplitterWidth = 5;
             this.scMain.TabIndex = 1;
             // 
             // tvStructure
@@ -260,9 +264,10 @@
             this.tvStructure.ImageIndex = 0;
             this.tvStructure.ImageList = this.imlTree;
             this.tvStructure.Location = new System.Drawing.Point(0, 0);
+            this.tvStructure.Margin = new System.Windows.Forms.Padding(4);
             this.tvStructure.Name = "tvStructure";
             this.tvStructure.SelectedImageIndex = 0;
-            this.tvStructure.Size = new System.Drawing.Size(233, 444);
+            this.tvStructure.Size = new System.Drawing.Size(310, 546);
             this.tvStructure.TabIndex = 0;
             this.tvStructure.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.tvStructure_BeforeSelect);
             this.tvStructure.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvStructure_NodeMouseClick);
@@ -287,6 +292,7 @@
             this.imlTree.Images.SetKeyName(13, "groupinheritederror16x16.ico");
             this.imlTree.Images.SetKeyName(14, "sidinherited16x16.ico");
             this.imlTree.Images.SetKeyName(15, "sidinheritederror16x16.ico");
+            this.imlTree.Images.SetKeyName(16, "link16x16.png");
             // 
             // tcMain
             // 
@@ -295,18 +301,20 @@
             this.tcMain.Controls.Add(this.tpDefault);
             this.tcMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tcMain.Location = new System.Drawing.Point(0, 0);
+            this.tcMain.Margin = new System.Windows.Forms.Padding(4);
             this.tcMain.Name = "tcMain";
             this.tcMain.SelectedIndex = 0;
-            this.tcMain.Size = new System.Drawing.Size(465, 444);
+            this.tcMain.Size = new System.Drawing.Size(621, 546);
             this.tcMain.TabIndex = 4;
             // 
             // tpDetail
             // 
             this.tpDetail.Controls.Add(this.pnDetail);
-            this.tpDetail.Location = new System.Drawing.Point(4, 22);
+            this.tpDetail.Location = new System.Drawing.Point(4, 25);
+            this.tpDetail.Margin = new System.Windows.Forms.Padding(4);
             this.tpDetail.Name = "tpDetail";
-            this.tpDetail.Padding = new System.Windows.Forms.Padding(3);
-            this.tpDetail.Size = new System.Drawing.Size(457, 418);
+            this.tpDetail.Padding = new System.Windows.Forms.Padding(4);
+            this.tpDetail.Size = new System.Drawing.Size(613, 517);
             this.tpDetail.TabIndex = 0;
             this.tpDetail.Text = "Detail";
             this.tpDetail.UseVisualStyleBackColor = true;
@@ -319,9 +327,10 @@
             this.pnDetail.Controls.Add(this.lbPrincipal);
             this.pnDetail.Controls.Add(this.lbType);
             this.pnDetail.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnDetail.Location = new System.Drawing.Point(3, 3);
+            this.pnDetail.Location = new System.Drawing.Point(4, 4);
+            this.pnDetail.Margin = new System.Windows.Forms.Padding(4);
             this.pnDetail.Name = "pnDetail";
-            this.pnDetail.Size = new System.Drawing.Size(451, 412);
+            this.pnDetail.Size = new System.Drawing.Size(605, 509);
             this.pnDetail.TabIndex = 3;
             // 
             // tcItem
@@ -331,10 +340,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tcItem.Controls.Add(this.tpBasicPermissions);
             this.tcItem.Controls.Add(this.tpAdvancedPermissions);
-            this.tcItem.Location = new System.Drawing.Point(12, 135);
+            this.tcItem.Location = new System.Drawing.Point(16, 166);
+            this.tcItem.Margin = new System.Windows.Forms.Padding(4);
             this.tcItem.Name = "tcItem";
             this.tcItem.SelectedIndex = 0;
-            this.tcItem.Size = new System.Drawing.Size(430, 274);
+            this.tcItem.Size = new System.Drawing.Size(577, 339);
             this.tcItem.TabIndex = 5;
             // 
             // tpBasicPermissions
@@ -342,10 +352,11 @@
             this.tpBasicPermissions.Controls.Add(this.clbBasic);
             this.tpBasicPermissions.Controls.Add(this.textBox1);
             this.tpBasicPermissions.Controls.Add(this.label2);
-            this.tpBasicPermissions.Location = new System.Drawing.Point(4, 22);
+            this.tpBasicPermissions.Location = new System.Drawing.Point(4, 25);
+            this.tpBasicPermissions.Margin = new System.Windows.Forms.Padding(4);
             this.tpBasicPermissions.Name = "tpBasicPermissions";
-            this.tpBasicPermissions.Padding = new System.Windows.Forms.Padding(3);
-            this.tpBasicPermissions.Size = new System.Drawing.Size(422, 248);
+            this.tpBasicPermissions.Padding = new System.Windows.Forms.Padding(4);
+            this.tpBasicPermissions.Size = new System.Drawing.Size(569, 310);
             this.tpBasicPermissions.TabIndex = 0;
             this.tpBasicPermissions.Text = "Basic Permissions";
             this.tpBasicPermissions.UseVisualStyleBackColor = true;
@@ -364,10 +375,11 @@
             "Read",
             "Write",
             "Special permissions"});
-            this.clbBasic.Location = new System.Drawing.Point(6, 40);
+            this.clbBasic.Location = new System.Drawing.Point(8, 49);
+            this.clbBasic.Margin = new System.Windows.Forms.Padding(4);
             this.clbBasic.Name = "clbBasic";
             this.clbBasic.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.clbBasic.Size = new System.Drawing.Size(410, 199);
+            this.clbBasic.Size = new System.Drawing.Size(549, 225);
             this.clbBasic.TabIndex = 5;
             // 
             // textBox1
@@ -376,17 +388,19 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox1.BackColor = System.Drawing.SystemColors.Window;
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Location = new System.Drawing.Point(82, 12);
+            this.textBox1.Location = new System.Drawing.Point(109, 15);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(334, 13);
+            this.textBox1.Size = new System.Drawing.Size(449, 15);
             this.textBox1.TabIndex = 4;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 15);
+            this.label2.Location = new System.Drawing.Point(21, 18);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(60, 13);
+            this.label2.Size = new System.Drawing.Size(79, 17);
             this.label2.TabIndex = 3;
             this.label2.Text = "Applies To:";
             // 
@@ -395,10 +409,11 @@
             this.tpAdvancedPermissions.Controls.Add(this.clbAdvanced);
             this.tpAdvancedPermissions.Controls.Add(this.tbAdvancedAppliesTo);
             this.tpAdvancedPermissions.Controls.Add(this.label1);
-            this.tpAdvancedPermissions.Location = new System.Drawing.Point(4, 22);
+            this.tpAdvancedPermissions.Location = new System.Drawing.Point(4, 25);
+            this.tpAdvancedPermissions.Margin = new System.Windows.Forms.Padding(4);
             this.tpAdvancedPermissions.Name = "tpAdvancedPermissions";
-            this.tpAdvancedPermissions.Padding = new System.Windows.Forms.Padding(3);
-            this.tpAdvancedPermissions.Size = new System.Drawing.Size(422, 248);
+            this.tpAdvancedPermissions.Padding = new System.Windows.Forms.Padding(4);
+            this.tpAdvancedPermissions.Size = new System.Drawing.Size(569, 310);
             this.tpAdvancedPermissions.TabIndex = 1;
             this.tpAdvancedPermissions.Text = "Advanced Permissions";
             this.tpAdvancedPermissions.UseVisualStyleBackColor = true;
@@ -424,9 +439,10 @@
             "Read permissions",
             "Change permissions",
             "Take ownership"});
-            this.clbAdvanced.Location = new System.Drawing.Point(6, 43);
+            this.clbAdvanced.Location = new System.Drawing.Point(8, 53);
+            this.clbAdvanced.Margin = new System.Windows.Forms.Padding(4);
             this.clbAdvanced.Name = "clbAdvanced";
-            this.clbAdvanced.Size = new System.Drawing.Size(410, 184);
+            this.clbAdvanced.Size = new System.Drawing.Size(549, 208);
             this.clbAdvanced.TabIndex = 2;
             // 
             // tbAdvancedAppliesTo
@@ -435,17 +451,19 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbAdvancedAppliesTo.BackColor = System.Drawing.SystemColors.Window;
             this.tbAdvancedAppliesTo.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbAdvancedAppliesTo.Location = new System.Drawing.Point(82, 12);
+            this.tbAdvancedAppliesTo.Location = new System.Drawing.Point(109, 15);
+            this.tbAdvancedAppliesTo.Margin = new System.Windows.Forms.Padding(4);
             this.tbAdvancedAppliesTo.Name = "tbAdvancedAppliesTo";
-            this.tbAdvancedAppliesTo.Size = new System.Drawing.Size(334, 13);
+            this.tbAdvancedAppliesTo.Size = new System.Drawing.Size(449, 15);
             this.tbAdvancedAppliesTo.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 15);
+            this.label1.Location = new System.Drawing.Point(21, 18);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 13);
+            this.label1.Size = new System.Drawing.Size(79, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "Applies To:";
             // 
@@ -453,37 +471,41 @@
             // 
             this.tbAccessType.BackColor = System.Drawing.SystemColors.Control;
             this.tbAccessType.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbAccessType.Location = new System.Drawing.Point(87, 37);
+            this.tbAccessType.Location = new System.Drawing.Point(116, 46);
+            this.tbAccessType.Margin = new System.Windows.Forms.Padding(4);
             this.tbAccessType.Name = "tbAccessType";
             this.tbAccessType.ReadOnly = true;
-            this.tbAccessType.Size = new System.Drawing.Size(267, 13);
+            this.tbAccessType.Size = new System.Drawing.Size(356, 15);
             this.tbAccessType.TabIndex = 4;
             // 
             // tbPrincipal
             // 
             this.tbPrincipal.BackColor = System.Drawing.SystemColors.Control;
             this.tbPrincipal.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbPrincipal.Location = new System.Drawing.Point(87, 11);
+            this.tbPrincipal.Location = new System.Drawing.Point(116, 14);
+            this.tbPrincipal.Margin = new System.Windows.Forms.Padding(4);
             this.tbPrincipal.Name = "tbPrincipal";
             this.tbPrincipal.ReadOnly = true;
-            this.tbPrincipal.Size = new System.Drawing.Size(267, 13);
+            this.tbPrincipal.Size = new System.Drawing.Size(356, 15);
             this.tbPrincipal.TabIndex = 3;
             // 
             // lbPrincipal
             // 
             this.lbPrincipal.AutoSize = true;
-            this.lbPrincipal.Location = new System.Drawing.Point(9, 11);
+            this.lbPrincipal.Location = new System.Drawing.Point(12, 14);
+            this.lbPrincipal.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbPrincipal.Name = "lbPrincipal";
-            this.lbPrincipal.Size = new System.Drawing.Size(50, 13);
+            this.lbPrincipal.Size = new System.Drawing.Size(66, 17);
             this.lbPrincipal.TabIndex = 1;
             this.lbPrincipal.Text = "Principal:";
             // 
             // lbType
             // 
             this.lbType.AutoSize = true;
-            this.lbType.Location = new System.Drawing.Point(9, 39);
+            this.lbType.Location = new System.Drawing.Point(12, 48);
+            this.lbType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbType.Name = "lbType";
-            this.lbType.Size = new System.Drawing.Size(72, 13);
+            this.lbType.Size = new System.Drawing.Size(93, 17);
             this.lbType.TabIndex = 2;
             this.lbType.Text = "Access Type:";
             // 
@@ -496,10 +518,11 @@
             this.tpFileFolder.Controls.Add(this.tcFileFolderDetails);
             this.tpFileFolder.Controls.Add(this.lbName);
             this.tpFileFolder.Controls.Add(this.lbFullPath);
-            this.tpFileFolder.Location = new System.Drawing.Point(4, 22);
+            this.tpFileFolder.Location = new System.Drawing.Point(4, 25);
+            this.tpFileFolder.Margin = new System.Windows.Forms.Padding(4);
             this.tpFileFolder.Name = "tpFileFolder";
-            this.tpFileFolder.Padding = new System.Windows.Forms.Padding(3);
-            this.tpFileFolder.Size = new System.Drawing.Size(457, 418);
+            this.tpFileFolder.Padding = new System.Windows.Forms.Padding(4);
+            this.tpFileFolder.Size = new System.Drawing.Size(613, 517);
             this.tpFileFolder.TabIndex = 1;
             this.tpFileFolder.Text = "FileFolder";
             this.tpFileFolder.UseVisualStyleBackColor = true;
@@ -510,18 +533,20 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbSize.BackColor = System.Drawing.SystemColors.Control;
             this.tbSize.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbSize.Location = new System.Drawing.Point(91, 69);
+            this.tbSize.Location = new System.Drawing.Point(121, 85);
+            this.tbSize.Margin = new System.Windows.Forms.Padding(4);
             this.tbSize.Name = "tbSize";
             this.tbSize.ReadOnly = true;
-            this.tbSize.Size = new System.Drawing.Size(350, 13);
+            this.tbSize.Size = new System.Drawing.Size(467, 15);
             this.tbSize.TabIndex = 13;
             // 
             // lbSize
             // 
             this.lbSize.AutoSize = true;
-            this.lbSize.Location = new System.Drawing.Point(23, 69);
+            this.lbSize.Location = new System.Drawing.Point(31, 85);
+            this.lbSize.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbSize.Name = "lbSize";
-            this.lbSize.Size = new System.Drawing.Size(30, 13);
+            this.lbSize.Size = new System.Drawing.Size(39, 17);
             this.lbSize.TabIndex = 12;
             this.lbSize.Text = "Size:";
             // 
@@ -531,10 +556,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbFullPath.BackColor = System.Drawing.SystemColors.Control;
             this.tbFullPath.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbFullPath.Location = new System.Drawing.Point(91, 44);
+            this.tbFullPath.Location = new System.Drawing.Point(121, 54);
+            this.tbFullPath.Margin = new System.Windows.Forms.Padding(4);
             this.tbFullPath.Name = "tbFullPath";
             this.tbFullPath.ReadOnly = true;
-            this.tbFullPath.Size = new System.Drawing.Size(350, 13);
+            this.tbFullPath.Size = new System.Drawing.Size(467, 15);
             this.tbFullPath.TabIndex = 11;
             // 
             // tbName
@@ -543,10 +569,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbName.BackColor = System.Drawing.SystemColors.Control;
             this.tbName.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbName.Location = new System.Drawing.Point(91, 18);
+            this.tbName.Location = new System.Drawing.Point(121, 22);
+            this.tbName.Margin = new System.Windows.Forms.Padding(4);
             this.tbName.Name = "tbName";
             this.tbName.ReadOnly = true;
-            this.tbName.Size = new System.Drawing.Size(350, 13);
+            this.tbName.Size = new System.Drawing.Size(467, 15);
             this.tbName.TabIndex = 10;
             // 
             // tcFileFolderDetails
@@ -557,10 +584,11 @@
             this.tcFileFolderDetails.Controls.Add(this.tpFileFolderDetails);
             this.tcFileFolderDetails.Controls.Add(this.tpFileFolderAttributes);
             this.tcFileFolderDetails.Controls.Add(this.tpError);
-            this.tcFileFolderDetails.Location = new System.Drawing.Point(6, 116);
+            this.tcFileFolderDetails.Location = new System.Drawing.Point(8, 143);
+            this.tcFileFolderDetails.Margin = new System.Windows.Forms.Padding(4);
             this.tcFileFolderDetails.Name = "tcFileFolderDetails";
             this.tcFileFolderDetails.SelectedIndex = 0;
-            this.tcFileFolderDetails.Size = new System.Drawing.Size(445, 296);
+            this.tcFileFolderDetails.Size = new System.Drawing.Size(593, 364);
             this.tcFileFolderDetails.TabIndex = 6;
             // 
             // tpFileFolderDetails
@@ -573,10 +601,11 @@
             this.tpFileFolderDetails.Controls.Add(this.label3);
             this.tpFileFolderDetails.Controls.Add(this.lbCreationTime);
             this.tpFileFolderDetails.Controls.Add(this.lbModificationTime);
-            this.tpFileFolderDetails.Location = new System.Drawing.Point(4, 22);
+            this.tpFileFolderDetails.Location = new System.Drawing.Point(4, 25);
+            this.tpFileFolderDetails.Margin = new System.Windows.Forms.Padding(4);
             this.tpFileFolderDetails.Name = "tpFileFolderDetails";
-            this.tpFileFolderDetails.Padding = new System.Windows.Forms.Padding(3);
-            this.tpFileFolderDetails.Size = new System.Drawing.Size(437, 270);
+            this.tpFileFolderDetails.Padding = new System.Windows.Forms.Padding(4);
+            this.tpFileFolderDetails.Size = new System.Drawing.Size(585, 335);
             this.tpFileFolderDetails.TabIndex = 0;
             this.tpFileFolderDetails.Text = "Details";
             this.tpFileFolderDetails.UseVisualStyleBackColor = true;
@@ -586,9 +615,10 @@
             this.tbOwner.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbOwner.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbOwner.Location = new System.Drawing.Point(112, 15);
+            this.tbOwner.Location = new System.Drawing.Point(149, 18);
+            this.tbOwner.Margin = new System.Windows.Forms.Padding(4);
             this.tbOwner.Name = "tbOwner";
-            this.tbOwner.Size = new System.Drawing.Size(319, 13);
+            this.tbOwner.Size = new System.Drawing.Size(425, 15);
             this.tbOwner.TabIndex = 9;
             // 
             // tbLastAccessTime
@@ -596,9 +626,10 @@
             this.tbLastAccessTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbLastAccessTime.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbLastAccessTime.Location = new System.Drawing.Point(113, 93);
+            this.tbLastAccessTime.Location = new System.Drawing.Point(151, 114);
+            this.tbLastAccessTime.Margin = new System.Windows.Forms.Padding(4);
             this.tbLastAccessTime.Name = "tbLastAccessTime";
-            this.tbLastAccessTime.Size = new System.Drawing.Size(318, 13);
+            this.tbLastAccessTime.Size = new System.Drawing.Size(424, 15);
             this.tbLastAccessTime.TabIndex = 8;
             // 
             // tbModificationTime
@@ -606,9 +637,10 @@
             this.tbModificationTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbModificationTime.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbModificationTime.Location = new System.Drawing.Point(112, 67);
+            this.tbModificationTime.Location = new System.Drawing.Point(149, 82);
+            this.tbModificationTime.Margin = new System.Windows.Forms.Padding(4);
             this.tbModificationTime.Name = "tbModificationTime";
-            this.tbModificationTime.Size = new System.Drawing.Size(319, 13);
+            this.tbModificationTime.Size = new System.Drawing.Size(425, 15);
             this.tbModificationTime.TabIndex = 7;
             // 
             // tbCreationTime
@@ -616,54 +648,60 @@
             this.tbCreationTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbCreationTime.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbCreationTime.Location = new System.Drawing.Point(112, 41);
+            this.tbCreationTime.Location = new System.Drawing.Point(149, 50);
+            this.tbCreationTime.Margin = new System.Windows.Forms.Padding(4);
             this.tbCreationTime.Name = "tbCreationTime";
-            this.tbCreationTime.Size = new System.Drawing.Size(319, 13);
+            this.tbCreationTime.Size = new System.Drawing.Size(425, 15);
             this.tbCreationTime.TabIndex = 6;
             // 
             // lbOwner
             // 
             this.lbOwner.AutoSize = true;
-            this.lbOwner.Location = new System.Drawing.Point(13, 15);
+            this.lbOwner.Location = new System.Drawing.Point(17, 18);
+            this.lbOwner.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbOwner.Name = "lbOwner";
-            this.lbOwner.Size = new System.Drawing.Size(41, 13);
+            this.lbOwner.Size = new System.Drawing.Size(53, 17);
             this.lbOwner.TabIndex = 0;
             this.lbOwner.Text = "Owner:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 93);
+            this.label3.Location = new System.Drawing.Point(17, 114);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(94, 13);
+            this.label3.Size = new System.Drawing.Size(123, 17);
             this.label3.TabIndex = 5;
             this.label3.Text = "Last Access Time:";
             // 
             // lbCreationTime
             // 
             this.lbCreationTime.AutoSize = true;
-            this.lbCreationTime.Location = new System.Drawing.Point(13, 41);
+            this.lbCreationTime.Location = new System.Drawing.Point(17, 50);
+            this.lbCreationTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbCreationTime.Name = "lbCreationTime";
-            this.lbCreationTime.Size = new System.Drawing.Size(75, 13);
+            this.lbCreationTime.Size = new System.Drawing.Size(100, 17);
             this.lbCreationTime.TabIndex = 3;
             this.lbCreationTime.Text = "Creation Time:";
             // 
             // lbModificationTime
             // 
             this.lbModificationTime.AutoSize = true;
-            this.lbModificationTime.Location = new System.Drawing.Point(13, 67);
+            this.lbModificationTime.Location = new System.Drawing.Point(17, 82);
+            this.lbModificationTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbModificationTime.Name = "lbModificationTime";
-            this.lbModificationTime.Size = new System.Drawing.Size(93, 13);
+            this.lbModificationTime.Size = new System.Drawing.Size(122, 17);
             this.lbModificationTime.TabIndex = 4;
             this.lbModificationTime.Text = "Modification Time:";
             // 
             // tpFileFolderAttributes
             // 
             this.tpFileFolderAttributes.Controls.Add(this.clbFileFolderAttributes);
-            this.tpFileFolderAttributes.Location = new System.Drawing.Point(4, 22);
+            this.tpFileFolderAttributes.Location = new System.Drawing.Point(4, 25);
+            this.tpFileFolderAttributes.Margin = new System.Windows.Forms.Padding(4);
             this.tpFileFolderAttributes.Name = "tpFileFolderAttributes";
-            this.tpFileFolderAttributes.Padding = new System.Windows.Forms.Padding(3);
-            this.tpFileFolderAttributes.Size = new System.Drawing.Size(437, 270);
+            this.tpFileFolderAttributes.Padding = new System.Windows.Forms.Padding(4);
+            this.tpFileFolderAttributes.Size = new System.Drawing.Size(585, 335);
             this.tpFileFolderAttributes.TabIndex = 1;
             this.tpFileFolderAttributes.Text = "Attributes";
             this.tpFileFolderAttributes.UseVisualStyleBackColor = true;
@@ -689,10 +727,11 @@
             "SparseFile",
             "System",
             "Temporary"});
-            this.clbFileFolderAttributes.Location = new System.Drawing.Point(3, 3);
+            this.clbFileFolderAttributes.Location = new System.Drawing.Point(4, 4);
+            this.clbFileFolderAttributes.Margin = new System.Windows.Forms.Padding(4);
             this.clbFileFolderAttributes.Name = "clbFileFolderAttributes";
             this.clbFileFolderAttributes.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.clbFileFolderAttributes.Size = new System.Drawing.Size(431, 264);
+            this.clbFileFolderAttributes.Size = new System.Drawing.Size(577, 327);
             this.clbFileFolderAttributes.TabIndex = 6;
             // 
             // tpError
@@ -701,10 +740,11 @@
             this.tpError.Controls.Add(this.lbStackTrace);
             this.tpError.Controls.Add(this.tbError);
             this.tpError.Controls.Add(this.lbErrorMessage);
-            this.tpError.Location = new System.Drawing.Point(4, 22);
+            this.tpError.Location = new System.Drawing.Point(4, 25);
+            this.tpError.Margin = new System.Windows.Forms.Padding(4);
             this.tpError.Name = "tpError";
-            this.tpError.Padding = new System.Windows.Forms.Padding(3);
-            this.tpError.Size = new System.Drawing.Size(437, 270);
+            this.tpError.Padding = new System.Windows.Forms.Padding(4);
+            this.tpError.Size = new System.Drawing.Size(585, 335);
             this.tpError.TabIndex = 2;
             this.tpError.Text = "Error";
             this.tpError.UseVisualStyleBackColor = true;
@@ -716,19 +756,21 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbStackTrace.BackColor = System.Drawing.SystemColors.Control;
             this.tbStackTrace.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbStackTrace.Location = new System.Drawing.Point(100, 45);
+            this.tbStackTrace.Location = new System.Drawing.Point(133, 55);
+            this.tbStackTrace.Margin = new System.Windows.Forms.Padding(4);
             this.tbStackTrace.Multiline = true;
             this.tbStackTrace.Name = "tbStackTrace";
             this.tbStackTrace.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbStackTrace.Size = new System.Drawing.Size(331, 219);
+            this.tbStackTrace.Size = new System.Drawing.Size(441, 266);
             this.tbStackTrace.TabIndex = 16;
             // 
             // lbStackTrace
             // 
             this.lbStackTrace.AutoSize = true;
-            this.lbStackTrace.Location = new System.Drawing.Point(16, 45);
+            this.lbStackTrace.Location = new System.Drawing.Point(21, 55);
+            this.lbStackTrace.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbStackTrace.Name = "lbStackTrace";
-            this.lbStackTrace.Size = new System.Drawing.Size(69, 13);
+            this.lbStackTrace.Size = new System.Drawing.Size(88, 17);
             this.lbStackTrace.TabIndex = 15;
             this.lbStackTrace.Text = "Stack Trace:";
             // 
@@ -738,50 +780,56 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbError.BackColor = System.Drawing.SystemColors.Control;
             this.tbError.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbError.Location = new System.Drawing.Point(100, 14);
+            this.tbError.Location = new System.Drawing.Point(133, 17);
+            this.tbError.Margin = new System.Windows.Forms.Padding(4);
             this.tbError.Name = "tbError";
-            this.tbError.Size = new System.Drawing.Size(331, 13);
+            this.tbError.Size = new System.Drawing.Size(441, 15);
             this.tbError.TabIndex = 14;
             // 
             // lbErrorMessage
             // 
             this.lbErrorMessage.AutoSize = true;
-            this.lbErrorMessage.Location = new System.Drawing.Point(16, 14);
+            this.lbErrorMessage.Location = new System.Drawing.Point(21, 17);
+            this.lbErrorMessage.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbErrorMessage.Name = "lbErrorMessage";
-            this.lbErrorMessage.Size = new System.Drawing.Size(78, 13);
+            this.lbErrorMessage.Size = new System.Drawing.Size(105, 17);
             this.lbErrorMessage.TabIndex = 0;
             this.lbErrorMessage.Text = "Error Message:";
             // 
             // lbName
             // 
             this.lbName.AutoSize = true;
-            this.lbName.Location = new System.Drawing.Point(23, 18);
+            this.lbName.Location = new System.Drawing.Point(31, 22);
+            this.lbName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbName.Name = "lbName";
-            this.lbName.Size = new System.Drawing.Size(38, 13);
+            this.lbName.Size = new System.Drawing.Size(49, 17);
             this.lbName.TabIndex = 2;
             this.lbName.Text = "Name:";
             // 
             // lbFullPath
             // 
             this.lbFullPath.AutoSize = true;
-            this.lbFullPath.Location = new System.Drawing.Point(23, 44);
+            this.lbFullPath.Location = new System.Drawing.Point(31, 54);
+            this.lbFullPath.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbFullPath.Name = "lbFullPath";
-            this.lbFullPath.Size = new System.Drawing.Size(51, 13);
+            this.lbFullPath.Size = new System.Drawing.Size(67, 17);
             this.lbFullPath.TabIndex = 1;
             this.lbFullPath.Text = "Full Path:";
             // 
             // tpDefault
             // 
-            this.tpDefault.Location = new System.Drawing.Point(4, 22);
+            this.tpDefault.Location = new System.Drawing.Point(4, 25);
+            this.tpDefault.Margin = new System.Windows.Forms.Padding(4);
             this.tpDefault.Name = "tpDefault";
-            this.tpDefault.Padding = new System.Windows.Forms.Padding(3);
-            this.tpDefault.Size = new System.Drawing.Size(457, 418);
+            this.tpDefault.Padding = new System.Windows.Forms.Padding(4);
+            this.tpDefault.Size = new System.Drawing.Size(613, 517);
             this.tpDefault.TabIndex = 2;
             this.tpDefault.Text = "Default";
             this.tpDefault.UseVisualStyleBackColor = true;
             // 
             // tsMain
             // 
+            this.tsMain.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.tsMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbStartScanning,
             this.tss1,
@@ -795,9 +843,9 @@
             this.tsbShowInherited,
             this.tsbFiles,
             this.tsbFileSize});
-            this.tsMain.Location = new System.Drawing.Point(0, 24);
+            this.tsMain.Location = new System.Drawing.Point(0, 28);
             this.tsMain.Name = "tsMain";
-            this.tsMain.Size = new System.Drawing.Size(703, 25);
+            this.tsMain.Size = new System.Drawing.Size(937, 28);
             this.tsMain.TabIndex = 2;
             // 
             // tsbStartScanning
@@ -813,12 +861,12 @@
             // tss1
             // 
             this.tss1.Name = "tss1";
-            this.tss1.Size = new System.Drawing.Size(6, 25);
+            this.tss1.Size = new System.Drawing.Size(6, 28);
             // 
             // tslScanDirection
             // 
             this.tslScanDirection.Name = "tslScanDirection";
-            this.tslScanDirection.Size = new System.Drawing.Size(86, 22);
+            this.tslScanDirection.Size = new System.Drawing.Size(108, 25);
             this.tslScanDirection.Text = "Scan Direction:";
             // 
             // tscScanDirection
@@ -828,7 +876,7 @@
             "Scan Children(Downward)",
             "Scan Current Folder Only"});
             this.tscScanDirection.Name = "tscScanDirection";
-            this.tscScanDirection.Size = new System.Drawing.Size(170, 25);
+            this.tscScanDirection.Size = new System.Drawing.Size(225, 28);
             this.tscScanDirection.ToolTipText = resources.GetString("tscScanDirection.ToolTipText");
             this.tscScanDirection.DropDownClosed += new System.EventHandler(this.tscScanDirection_DropDownClosed);
             this.tscScanDirection.SelectedIndexChanged += new System.EventHandler(this.tscScanDirection_SelectedIndexChanged);
@@ -836,12 +884,12 @@
             // tss2
             // 
             this.tss2.Name = "tss2";
-            this.tss2.Size = new System.Drawing.Size(6, 25);
+            this.tss2.Size = new System.Drawing.Size(6, 28);
             // 
             // tslLevelCount
             // 
             this.tslLevelCount.Name = "tslLevelCount";
-            this.tslLevelCount.Size = new System.Drawing.Size(42, 22);
+            this.tslLevelCount.Size = new System.Drawing.Size(52, 25);
             this.tslLevelCount.Text = "Levels:";
             this.tslLevelCount.ToolTipText = "The number of levels to scan.\r\n\r\nThe program will only scan up, or down the numbe" +
     "r of levels specified here. To scan until all possible items are processed, set " +
@@ -850,7 +898,7 @@
             // ttbLevelCount
             // 
             this.ttbLevelCount.Name = "ttbLevelCount";
-            this.ttbLevelCount.Size = new System.Drawing.Size(30, 25);
+            this.ttbLevelCount.Size = new System.Drawing.Size(39, 28);
             this.ttbLevelCount.Text = global::aTree.Properties.Settings.Default.Scan_Levels;
             this.ttbLevelCount.Leave += new System.EventHandler(this.ttbLevelCount_Leave);
             this.ttbLevelCount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ttbLevelCount_KeyPress);
@@ -860,12 +908,12 @@
             // tss3
             // 
             this.tss3.Name = "tss3";
-            this.tss3.Size = new System.Drawing.Size(6, 25);
+            this.tss3.Size = new System.Drawing.Size(6, 28);
             // 
             // tslInheritedItems
             // 
             this.tslInheritedItems.Name = "tslInheritedItems";
-            this.tslInheritedItems.Size = new System.Drawing.Size(89, 22);
+            this.tslInheritedItems.Size = new System.Drawing.Size(111, 25);
             this.tslInheritedItems.Text = "Inherited Items:";
             // 
             // tsbShowInherited
@@ -877,7 +925,7 @@
             this.tsbShowInherited.Image = global::aTree.Properties.Resources.inherited16x16;
             this.tsbShowInherited.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbShowInherited.Name = "tsbShowInherited";
-            this.tsbShowInherited.Size = new System.Drawing.Size(23, 22);
+            this.tsbShowInherited.Size = new System.Drawing.Size(24, 25);
             this.tsbShowInherited.Text = "Show Inherited ACEs";
             this.tsbShowInherited.CheckedChanged += new System.EventHandler(this.tsbShowInherited_CheckedChanged);
             // 
@@ -891,7 +939,7 @@
             this.tsbFiles.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbFiles.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbFiles.Name = "tsbFiles";
-            this.tsbFiles.Size = new System.Drawing.Size(23, 22);
+            this.tsbFiles.Size = new System.Drawing.Size(23, 25);
             this.tsbFiles.Text = "Show Files";
             this.tsbFiles.CheckedChanged += new System.EventHandler(this.tsbFiles_CheckedChanged);
             // 
@@ -904,47 +952,51 @@
             this.tsbFileSize.Image = global::aTree.Properties.Resources.size16x16;
             this.tsbFileSize.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbFileSize.Name = "tsbFileSize";
-            this.tsbFileSize.Size = new System.Drawing.Size(23, 22);
+            this.tsbFileSize.Size = new System.Drawing.Size(24, 25);
             this.tsbFileSize.Text = "File Size";
             this.tsbFileSize.CheckedChanged += new System.EventHandler(this.tsbFileSize_CheckedChanged);
             // 
             // ssMain
             // 
+            this.ssMain.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.ssMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tslProgressBar,
             this.tslStatus});
-            this.ssMain.Location = new System.Drawing.Point(0, 528);
+            this.ssMain.Location = new System.Drawing.Point(0, 651);
             this.ssMain.Name = "ssMain";
-            this.ssMain.Size = new System.Drawing.Size(703, 22);
+            this.ssMain.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
+            this.ssMain.Size = new System.Drawing.Size(937, 26);
             this.ssMain.TabIndex = 3;
             // 
             // tslProgressBar
             // 
             this.tslProgressBar.MarqueeAnimationSpeed = 40;
             this.tslProgressBar.Name = "tslProgressBar";
-            this.tslProgressBar.Size = new System.Drawing.Size(200, 16);
+            this.tslProgressBar.Size = new System.Drawing.Size(267, 20);
             // 
             // tslStatus
             // 
             this.tslStatus.Name = "tslStatus";
-            this.tslStatus.Size = new System.Drawing.Size(64, 17);
+            this.tslStatus.Size = new System.Drawing.Size(81, 21);
             this.tslStatus.Text = "Status: Idle";
             // 
             // lbPath
             // 
             this.lbPath.AutoSize = true;
-            this.lbPath.Location = new System.Drawing.Point(12, 58);
+            this.lbPath.Location = new System.Drawing.Point(16, 71);
+            this.lbPath.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbPath.Name = "lbPath";
-            this.lbPath.Size = new System.Drawing.Size(35, 13);
+            this.lbPath.Size = new System.Drawing.Size(45, 17);
             this.lbPath.TabIndex = 4;
             this.lbPath.Text = "Path: ";
             // 
             // btnBrowse
             // 
             this.btnBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBrowse.Location = new System.Drawing.Point(616, 53);
+            this.btnBrowse.Location = new System.Drawing.Point(821, 65);
+            this.btnBrowse.Margin = new System.Windows.Forms.Padding(4);
             this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(75, 23);
+            this.btnBrowse.Size = new System.Drawing.Size(100, 28);
             this.btnBrowse.TabIndex = 6;
             this.btnBrowse.Text = "Browse";
             this.btnBrowse.UseVisualStyleBackColor = true;
@@ -970,16 +1022,18 @@
             this.tbPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbPath.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::aTree.Properties.Settings.Default, "ACL_FolderPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.tbPath.Location = new System.Drawing.Point(53, 55);
+            this.tbPath.Location = new System.Drawing.Point(71, 68);
+            this.tbPath.Margin = new System.Windows.Forms.Padding(4);
             this.tbPath.Name = "tbPath";
-            this.tbPath.Size = new System.Drawing.Size(557, 20);
+            this.tbPath.Size = new System.Drawing.Size(741, 22);
             this.tbPath.TabIndex = 5;
             this.tbPath.Text = global::aTree.Properties.Settings.Default.ACL_FolderPath;
             // 
             // cmsTree
             // 
+            this.cmsTree.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cmsTree.Name = "cmsTree";
-            this.cmsTree.Size = new System.Drawing.Size(61, 4);
+            this.cmsTree.Size = new System.Drawing.Size(67, 4);
             // 
             // bwOpenFile
             // 
@@ -993,9 +1047,9 @@
             // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(703, 550);
+            this.ClientSize = new System.Drawing.Size(937, 677);
             this.Controls.Add(this.btnBrowse);
             this.Controls.Add(this.tbPath);
             this.Controls.Add(this.lbPath);
@@ -1005,6 +1059,7 @@
             this.Controls.Add(this.msMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.msMain;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmMain";
             this.Text = "aTree";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
